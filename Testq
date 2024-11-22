@@ -1,0 +1,18 @@
+import streamlit as st
+
+# Title of the application
+st.title("File Content Viewer")
+
+# File uploader component to upload a file
+uploaded_file = st.file_uploader("Choose a file", type=["txt", "md", "csv", "log"])
+
+# Check if a file is uploaded
+if uploaded_file is not None:
+    # Read the contents of the uploaded file
+    file_contents = uploaded_file.read().decode("utf-8")
+
+    # Display the contents
+    st.subheader("File Contents:")
+    st.text_area("Contents of the uploaded file", file_contents, height=300)
+else:
+    st.info("Please upload a file to view its contents.")
