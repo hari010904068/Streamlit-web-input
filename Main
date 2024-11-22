@@ -1,0 +1,22 @@
+import streamlit as st
+from urllib.parse import urlparse
+
+# Title of the application
+st.title("Web URL Input App")
+
+# Input box for the user to provide a URL
+url_input = st.text_input("Enter a web URL:", placeholder="https://example.com")
+
+# Button to validate the URL
+if st.button("Validate URL"):
+    if url_input:
+        # Parse the URL
+        parsed_url = urlparse(url_input)
+
+        # Check if the URL is valid
+        if parsed_url.scheme and parsed_url.netloc:
+            st.success(f"The URL '{url_input}' is valid!")
+        else:
+            st.error("Invalid URL. Please enter a proper web URL (e.g., https://example.com).")
+    else:
+        st.warning("Please enter a URL to validate.")
