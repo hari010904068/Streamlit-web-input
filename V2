@@ -1,0 +1,31 @@
+import streamlit as st
+
+# Title of the application
+st.title("Write to a File and Display its Contents")
+
+# Text input area for the user to enter content
+user_input = st.text_area("Enter content to write into the file:")
+
+# Button to save content to a file
+if st.button("Save to File"):
+    if user_input.strip():
+        # Write the user input to a file
+        file_name = "output.txt"
+        with open(file_name, "w") as file:
+            file.write(user_input)
+        
+        st.success(f"Content successfully saved to {file_name}!")
+    else:
+        st.warning("Please enter some content before saving.")
+
+# Button to display the contents of the file
+if st.button("Display File Contents"):
+    try:
+        # Read the content of the file
+        with open("output.txt", "r") as file:
+            file_contents = file.read()
+        
+        # Display the content in a text area
+        st.text_area("Contents of the file:", file_contents, height=300)
+    except FileNotFoundError:
+        st.error("File not found. Please save some content first.")
